@@ -1,0 +1,11 @@
+html, body {
+    height: 100%;
+}
+
+  #pie {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    height: 70%;
+    position: relative;
+  }

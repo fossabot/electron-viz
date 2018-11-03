@@ -1,42 +1,42 @@
-const csvFilePath = './players.csv';
+const csvFilePath = './teams.csv';
 const picasso = require('picasso.js'); 
 const csv = require('csvtojson');
 
-var a = new Array();
-
+// csv to json 
 csv()
 .fromFile(csvFilePath)
-.then((jsonObj)=>{
-  transform(jsonObj);
-    let ans = transform(jsonObj);     
-    drawPieChart(ans);
+.then((jsonObj)=>{ 
+    let transformed = transform(jsonObj);   
+    drawPieChart(transformed);
 });
  
-
+// convert to picasso data format
 let transform = (data) => { 
   let dataArray = [];
   let transformedData = [];
-  for(let i = 0; i < data.length; i++) {
-    if(i === 20) break;
-    transformedData.push(data[i].surname);
+  dataArray.push(['draws', 'games', 'goalsAgainst', 'goalsFor', 'losses', 'ranking', 'redCards', 'team', 'wins', 'yellowCards']); 
+  
+  for(let i = 0; i < data.length; i++) { 
+    transformedData.push(data[i].draws);
+    transformedData.push(data[i].games);
+    transformedData.push(data[i].goalsAgainst);
+    transformedData.push(data[i].goalsFor);
+    transformedData.push(data[i].losses);
+    transformedData.push(data[i].ranking);
+    transformedData.push(data[i].redCards);
     transformedData.push(data[i].team);
-    transformedData.push(data[i].position);
-    transformedData.push(data[i].minutes);
-    transformedData.push(data[i].shots);
-    transformedData.push(data[i].passes);
-    transformedData.push(data[i].tackles);
-    transformedData.push(data[i].saves);
+    transformedData.push(data[i].wins);
+    transformedData.push(data[i].yellowCards);
     dataArray.push(transformedData);
     transformedData = [];    
   }
-
-  dataArray.unshift(['surname', 'team', 'position', 'minutes', 'shots', 'passes', 'tackles', 'saves']); 
-  console.log(dataArray);
+  
   return dataArray;
 };
+ 
 
 
-// visualization
+// pie chart visualization
 let drawPieChart = (Data) => {
   picasso.chart({
   element: document.querySelector('#pie'),
@@ -47,7 +47,7 @@ let drawPieChart = (Data) => {
   settings: {
     scales: {
       c: {
-        data: { extract: { field: 'surname' } }, type: 'color'
+        data: { extract: { field: 'team' } }, type: 'color'
       }
     },
     components: [{
@@ -58,9 +58,9 @@ let drawPieChart = (Data) => {
       type: 'pie',
       data: {
         extract: {
-          field: 'surname',
+          field: 'team',
           props: {
-            num: { field: 'minutes' }
+            num: { field: 'wins' }
           }
         }
       },

@@ -2,10 +2,10 @@ html, body {
     height: 100%;
 }
 
-  #pie {
+  #pie, #bar, #donut, #scatter, #stacked {
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
-    height: 70%;
+    width: 80%;
+    height: 80%;
     position: relative;
   }

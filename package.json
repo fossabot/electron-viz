@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "csvtojson": "^2.0.8",
-    "picasso.js": "^0.15.0"
+    "picasso.js": "^0.18.2"
   }
 }
